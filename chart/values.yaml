@@ -1,0 +1,16 @@
+name: image-logger
+
+image:
+  repository: nickgerace/image-logger
+  pullPolicy: Always
+  tag: unstable
+
+logLevel: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+replicaCount: 1
