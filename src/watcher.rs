@@ -14,27 +14,30 @@ use kube::{
     api::{Api, ListParams, WatchEvent},
     Client,
 };
-use log::{debug, error};
+use log::{debug, error, warn};
 
 /// Watch pods on cluster scope and log the results via the [log](https://crates.io/crates/log) crate.
 pub async fn watcher(client: Client) -> Result<()> {
-    debug!("Creating Pods API abstraction...");
+    debug!("Creating Pods API abstraction and event driver...");
     let pods: Api<Pod> = Api::all(client.clone());
     let wp = ListParams::default().timeout(0);
-    debug!("Creating stream and event driver...");
-    let mut stream = pods.watch(&wp, "0").await?.boxed();
     let mut event_driver = EventDriver::new();
-
-    debug!("Watching events...");
-    while let Some(status) = stream.try_next().await? {
-        match status {
-            WatchEvent::<Pod>::Added(pod) => event_driver.new_event(pod, EventType::Added).await,
-            WatchEvent::<Pod>::Deleted(pod) => {
-                event_driver.new_event(pod, EventType::Deleted).await
+    loop {
+        debug!("Creating stream with Pods API abstraction..");
+        let mut stream = pods.watch(&wp, "0").await?.boxed();
+        debug!("Watching events...");
+        while let Some(status) = stream.try_next().await? {
+            match status {
+                WatchEvent::<Pod>::Added(pod) => {
+                    event_driver.new_event(pod, EventType::Added).await
+                }
+                WatchEvent::<Pod>::Deleted(pod) => {
+                    event_driver.new_event(pod, EventType::Deleted).await
+                }
+                WatchEvent::<Pod>::Error(report) => error!("{}", report),
+                _ => {}
             }
-            WatchEvent::<Pod>::Error(report) => error!("{}", report),
-            _ => {}
         }
+        warn!("Restarting watcher...");
     }
-    Ok(())
 }

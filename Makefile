@@ -35,10 +35,10 @@ docker-build:
 	cd $(MAKEPATH); docker build -t $(IMAGE) .
 
 install: uninstall
-	helm install -n $(NAMESPACE) --create-namespace image-logger $(MAKEPATH)/chart
+	helm install -n $(NAMESPACE) --create-namespace --wait image-logger $(MAKEPATH)/chart
 
 install-debug: uninstall
-	helm install -n $(NAMESPACE) --create-namespace image-logger $(MAKEPATH)/chart --set logLevel=DEBUG
+	helm install -n $(NAMESPACE) --create-namespace --wait image-logger $(MAKEPATH)/chart --set logLevel=DEBUG
 
 uninstall:
 	-helm uninstall -n $(NAMESPACE) image-logger

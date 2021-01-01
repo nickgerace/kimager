@@ -28,7 +28,7 @@ Clone the repository, and `cd` into it.
 You can change the namespace name to whatever you prefer.
 
 ```bash
-helm install -n image-logger --create-namespace image-logger ./chart
+helm install -n image-logger --create-namespace --wait image-logger ./chart
 ```
 
 ## Follow Logs
