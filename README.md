@@ -1,6 +1,7 @@
 # image-logger
 
 [![License](https://img.shields.io/github/license/nickgerace/image-logger?style=flat-square)](./LICENSE)
+[![Docker Image Size (tag)](https://img.shields.io/docker/image-size/nickgerace/image-logger/unstable?style=flat-square)](https://hub.docker.com/r/nickgerace/image-logger/tags)
 
 <!--
 [![Latest SemVer GitHub Tag](https://img.shields.io/github/v/tag/nickgerace/image-logger?label=version&style=flat-square)](https://github.com/nickgerace/image-logger/releases/latest)
