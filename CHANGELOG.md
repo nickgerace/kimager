@@ -11,4 +11,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Base contents
+- Description and example output to README
 - Loop for watcher in case timeouts occur
+- Security considerations to README
+- Two Docker Hub tags: `unstable` for users and `broken` for development
+
+### Changed
+
+- `env_logger` location from `main.rs` to `lib.rs`
+- Hasher to only be created once during add events
+- Name from "image-logger" to "cluster-image-logger"
+
+### Removed
+
+- Module path from `env_logger` output

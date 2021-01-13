@@ -1,12 +1,13 @@
 /*
- * image-logger
- * https://github.com/nickgerace/image-logger
+ * cluster-image-logger
+ * https://github.com/nickgerace/cluster-image-logger
  * Author: Nick Gerace
  * License: Apache 2.0
  */
 
 use crate::util;
 
+use std::collections::hash_map::DefaultHasher;
 use std::collections::HashMap;
 
 use bimap::BiMap;
@@ -39,11 +40,11 @@ impl EventDriver {
         match Meta::namespace(&pod) {
             Some(pod_ns) => match event {
                 EventType::Added => {
-                    debug!("[+] [pod] {} ({})", &pod_name, &pod_ns);
+                    debug!("[+|pod]  {}  [{}]", &pod_name, &pod_ns);
                     self.add_event(pod, pod_name, pod_ns).await;
                 }
                 EventType::Deleted => {
-                    debug!("[-] [pod] {} ({})", &pod_name, &pod_ns);
+                    debug!("[-|pod]  {}  [{}]", &pod_name, &pod_ns);
                     self.delete_event(pod_name, pod_ns).await;
                 }
             },
@@ -54,17 +55,17 @@ impl EventDriver {
     async fn add_event(&mut self, pod: Pod, pod_name: String, pod_ns: String) {
         match util::get_images(&pod) {
             Some(images) => {
-                let pod_hash = util::hash_tuple(&(&pod_name, &pod_ns));
+                let mut hasher = DefaultHasher::new();
+                let pod_hash = util::hash_tuple(&(&pod_name, &pod_ns), &mut hasher);
                 self.pods
                     .insert((pod_name.clone(), pod_ns.clone()), pod_hash);
                 for image in images {
-                    let image_hash = util::hash_string(&image);
+                    let image_hash = util::hash_string(&image, &mut hasher);
                     self.images.insert(image.clone(), image_hash);
-
                     if !self.map.contains_key(&image_hash) {
-                        info!("[+] [image] {} ({}) ({})", &image, &pod_name, &pod_ns);
+                        info!("[+|image]  {}  [{}|{}]", &image, &pod_ns, &pod_name);
                     } else {
-                        debug!("[+=] [image] {} ({}) ({})", &image, &pod_name, &pod_ns);
+                        debug!("[+=|image]  {}  [{}|{}]", &image, &pod_ns, &pod_name);
                     }
                     let image_submap = self.map.entry(image_hash).or_default();
                     image_submap.push(pod_hash);
@@ -101,9 +102,9 @@ impl EventDriver {
                 match self.images.get_by_right(&image_hash) {
                     Some(image) => {
                         if image_submap.is_empty() {
-                            info!("[-] [image] {} ({}) ({})", image, index.0, index.1);
+                            info!("[-|image]  {}  [{}|{}]", image, index.1, index.0);
                         } else {
-                            debug!("[-=] [image] {} ({}) ({})", image, index.0, index.1);
+                            debug!("[-=|image]  {}  [{}|{}]", image, index.1, index.0);
                         }
                         self.images.remove_by_right(&image_hash);
                     }
