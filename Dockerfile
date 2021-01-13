@@ -6,5 +6,5 @@ RUN cargo build --release
 
 FROM scratch
 WORKDIR /bin/
-COPY --from=build /build/target/x86_64-unknown-linux-musl/release/image-logger .
-ENTRYPOINT ["/bin/image-logger"]
+COPY --from=build /build/target/x86_64-unknown-linux-musl/release/cluster-image-logger .
+ENTRYPOINT ["/bin/cluster-image-logger"]

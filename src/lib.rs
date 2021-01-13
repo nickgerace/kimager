@@ -1,6 +1,6 @@
 /*
- * image-logger
- * https://github.com/nickgerace/image-logger
+ * cluster-image-logger
+ * https://github.com/nickgerace/cluster-image-logger
  * Author: Nick Gerace
  * License: Apache 2.0
  */
@@ -11,15 +11,19 @@ mod watcher;
 
 use eyre::Result;
 use kube::Client;
-use log::debug;
+use log::{debug, info};
 
-/// This function is the primary, backend driver for `image-logger`.
+/// This function is the primary, backend driver for `cluster-image-logger`.
 /// When executed, results will be logged via the [log](https://crates.io/crates/log) crate.
 /// Set the `RUST_LOG` environment variable to change the logging level.
 pub async fn run() -> Result<()> {
+    env_logger::builder().format_module_path(false).init();
+    info!(
+        "Starting cluster-image-logger... (for more information: https://github.com/nickgerace/cluster-image-logger)"
+    );
     debug!("Creating Kubernetes client...");
     let client = Client::try_default().await?;
     watcher::watcher(client.clone()).await?;
-    debug!("Ending watcher...");
+    debug!("Watcher has stopped.");
     Ok(())
 }

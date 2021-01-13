@@ -1,7 +1,7 @@
-name: image-logger
+name: cluster-image-logger
 
 image:
-  repository: nickgerace/image-logger
+  repository: nickgerace/cluster-image-logger
   pullPolicy: Always
   tag: unstable
 

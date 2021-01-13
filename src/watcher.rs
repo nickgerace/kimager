@@ -1,6 +1,6 @@
 /*
- * image-logger
- * https://github.com/nickgerace/image-logger
+ * cluster-image-logger
+ * https://github.com/nickgerace/cluster-image-logger
  * Author: Nick Gerace
  * License: Apache 2.0
  */

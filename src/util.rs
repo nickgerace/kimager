@@ -1,6 +1,6 @@
 /*
- * image-logger
- * https://github.com/nickgerace/image-logger
+ * cluster-image-logger
+ * https://github.com/nickgerace/cluster-image-logger
  * Author: Nick Gerace
  * License: Apache 2.0
  */
@@ -30,14 +30,12 @@ pub fn get_images(pod: &Pod) -> Option<Vec<String>> {
     }
 }
 
-pub fn hash_string(s: &str) -> u64 {
-    let mut hasher = DefaultHasher::new();
-    s.hash(&mut hasher);
+pub fn hash_string(s: &str, hasher: &mut DefaultHasher) -> u64 {
+    s.hash(hasher);
     hasher.finish()
 }
 
-pub fn hash_tuple(t: &(&str, &str)) -> u64 {
-    let mut hasher = DefaultHasher::new();
-    t.hash(&mut hasher);
+pub fn hash_tuple(t: &(&str, &str), hasher: &mut DefaultHasher) -> u64 {
+    t.hash(hasher);
     hasher.finish()
 }
