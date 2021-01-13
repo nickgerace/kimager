@@ -16,7 +16,6 @@ The "logging" part involves sending a string to STDOUT with the timestamp, log l
 ```
 [user at hostname in ~]
 % kubectl logs -n cluster-image-logger $(kubectl get pods -n cluster-image-logger --no-headers -o custom-columns=":metadata.name") --follow
-[2021-01-13T20:50:51Z INFO ] Starting cluster-image-logger... (for more information: https://github.com/nickgerace/cluster-image-logger)
 [2021-01-13T20:50:51Z INFO ] [+|image]  rancher/coredns-coredns:1.8.0  [kube-system|coredns-854c77959c-wtqcc]
 [2021-01-13T20:50:51Z INFO ] [+|image]  rancher/klipper-helm:v0.3.2  [kube-system|helm-install-traefik-p8sg9]
 [2021-01-13T20:50:51Z INFO ] [+|image]  rancher/library-traefik:1.7.19  [kube-system|traefik-6f9cbd9bd4-5c6s6]
@@ -29,8 +28,6 @@ The "logging" part involves sending a string to STDOUT with the timestamp, log l
 [2021-01-13T20:51:35Z INFO ] [-|image]  perl  [foo|pi-t5zl5]
 [2021-01-13T20:51:15Z INFO ] [-|image]  nginx:1.14.2  [foo|nginx-deployment-66b6c48dd5-4g5nj]
 ```
-
-How to parse the logs: `[TIMESTAMP LOG_LEVEL ] [ADDED_OR_DELETED_SYMBOL|RESOURCE_TYPE]  IMAGE_NAME:IMAGE_TAG  [POD_NAMESPACE|POD_NAME]`.
 
 ## WARNING: THIS REPOSITORY IS UNSTABLE UNTIL VERSION 1.0.0
 
@@ -58,6 +55,12 @@ Follow logs via the pod's STDOUT.
 
 ```bash
 kubectl logs -n cluster-image-logger $(kubectl get pods -n cluster-image-logger --no-headers -o custom-columns=":metadata.name") --follow
+```
+
+When reading or parsing the logs, reference the following format...
+
+```
+[TIMESTAMP LOG_LEVEL ] [ADDED_OR_DELETED_SYMBOL|RESOURCE_TYPE]  IMAGE_NAME:IMAGE_TAG  [POD_NAMESPACE|POD_NAME]
 ```
 
 ### Why not use labels to follow logs?
