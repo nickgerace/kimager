@@ -1,13 +1,5 @@
-/*
- * cluster-image-logger
- * https://github.com/nickgerace/cluster-image-logger
- * Author: Nick Gerace
- * License: Apache 2.0
- */
-
-use std::env;
-
 use eyre::Result;
+use std::env;
 
 #[tokio::main]
 async fn main() -> Result<()> {

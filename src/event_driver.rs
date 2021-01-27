@@ -1,19 +1,10 @@
-/*
- * cluster-image-logger
- * https://github.com/nickgerace/cluster-image-logger
- * Author: Nick Gerace
- * License: Apache 2.0
- */
-
 use crate::util;
-
-use std::collections::hash_map::DefaultHasher;
-use std::collections::HashMap;
-
 use bimap::BiMap;
 use k8s_openapi::api::core::v1::Pod;
 use kube::api::Meta;
 use log::{debug, error, info};
+use std::collections::hash_map::DefaultHasher;
+use std::collections::HashMap;
 
 pub enum EventType {
     Added,

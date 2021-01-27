@@ -1,12 +1,4 @@
-/*
- * cluster-image-logger
- * https://github.com/nickgerace/cluster-image-logger
- * Author: Nick Gerace
- * License: Apache 2.0
- */
-
 use crate::event_driver::{EventDriver, EventType};
-
 use eyre::Result;
 use futures::{StreamExt, TryStreamExt};
 use k8s_openapi::api::core::v1::Pod;

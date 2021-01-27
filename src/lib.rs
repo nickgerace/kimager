@@ -1,10 +1,3 @@
-/*
- * cluster-image-logger
- * https://github.com/nickgerace/cluster-image-logger
- * Author: Nick Gerace
- * License: Apache 2.0
- */
-
 mod event_driver;
 mod util;
 mod watcher;

@@ -1,15 +1,7 @@
-/*
- * cluster-image-logger
- * https://github.com/nickgerace/cluster-image-logger
- * Author: Nick Gerace
- * License: Apache 2.0
- */
-
-use std::collections::hash_map::DefaultHasher;
-use std::hash::{Hash, Hasher};
-
 use k8s_openapi::api::core::v1::Pod;
 use log::debug;
+use std::collections::hash_map::DefaultHasher;
+use std::hash::{Hash, Hasher};
 
 pub fn get_images(pod: &Pod) -> Option<Vec<String>> {
     match &pod.spec {

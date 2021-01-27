@@ -18,10 +18,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
+- Combined use statements in each file
 - `env_logger` location from `main.rs` to `lib.rs`
 - Hasher to only be created once during add events
 - Name from "image-logger" to "cluster-image-logger"
 
 ### Removed
 
+- File header comments
 - Module path from `env_logger` output
