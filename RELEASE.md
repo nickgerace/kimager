@@ -9,7 +9,7 @@ This document contains all information related to release.
 
 ```sh
 cargo update
-cargo fmt --all -- --check
+cargo +nightly fmt --all -- --check
 cargo clippy -- -D warnings
 cargo test -- --nocapture
 cargo doc --open
