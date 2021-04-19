@@ -1,16 +1,14 @@
-name: cluster-image-logger
-
 image:
-  repository: nickgerace/cluster-image-logger
+  repository: nickgerace/kimager
   pullPolicy: Always
   tag: unstable
 
 logLevel: ""
+
+replicaCount: 1
 
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
-
-replicaCount: 1

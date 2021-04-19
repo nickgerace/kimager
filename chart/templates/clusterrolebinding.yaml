@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kimager
+subjects:
+- kind: ServiceAccount
+  name: kimager
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: kimager
+  apiGroup: rbac.authorization.k8s.io

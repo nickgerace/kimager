@@ -1,10 +1,9 @@
 use crate::util;
 use bimap::BiMap;
 use k8s_openapi::api::core::v1::Pod;
-use kube::api::Meta;
+use kube::api::Resource;
 use log::{debug, error, info};
-use std::collections::hash_map::DefaultHasher;
-use std::collections::HashMap;
+use std::collections::{hash_map::DefaultHasher, HashMap};
 
 pub enum EventType {
     Added,
@@ -27,8 +26,8 @@ impl EventDriver {
     }
 
     pub async fn new_event(&mut self, pod: Pod, event: EventType) {
-        let pod_name = Meta::name(&pod);
-        match Meta::namespace(&pod) {
+        let pod_name = Resource::name(&pod);
+        match Resource::namespace(&pod) {
             Some(pod_ns) => match event {
                 EventType::Added => {
                     debug!("[+|pod]  {}  [{}]", &pod_name, &pod_ns);
