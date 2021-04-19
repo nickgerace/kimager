@@ -103,11 +103,11 @@ This repository follows and enforces the Rust programming language's [Code of Co
 
 The following prerequisites must be met before version `1.0.0` is released:
 
-- [ ] Helm install without needing to clone repository
-- [ ] GitHub action that runs `fmt` and `clippy` for `x86_64-unknown-linux-gnu`, and `build` for `x86_64-unknown-linux-musl`
-- [ ] Publish a `latest`, and at least one "released" (e.g. `0.1.0`), Dockerhub image
-- [ ] Publish to crates.io (`0.1.0` tag first)
 - [ ] Re-add unit tests
+- [ ] Helm install without needing to clone repository
+- [ ] GitHub action that runs `fmt`, `clippy`, `test`, and `build` on a Linux amd64 host
+- [x] Publish a `latest`, and at least one "released" (e.g. `0.1.0`), Dockerhub image
+- [x] Publish to crates.io (`0.1.0` tag first)
 
 ## Special Thanks
 

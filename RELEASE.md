@@ -4,7 +4,8 @@ This document contains all information related to release.
 
 ## Preparation
 
-- Change the version in `Cargo.toml` to the `<new-tag>`
+- Change the version in `Cargo.toml` to the new `$TAG`
+- Update `image.tag` in `values.yaml` to the new `$TAG`
 - Run the commands and verify that everything looks/works as expected:
 
 ```sh
@@ -48,6 +49,8 @@ Check `crates.io` and `docs.rs` afterwards via the [crate's page](https://crates
 On a branch tracking the new tag, execute the following commands at the root of the repository:
 
 ```sh
-docker build -t $IMAGE .
-docker push $IMAGE
+docker build -t $IMAGE:$TAG .
+docker push $IMAGE:$TAG
+docker tag $IMAGE:$TAG $IMAGE:latest
+docker push $IMAGE:latest
 ```
