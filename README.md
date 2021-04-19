@@ -2,10 +2,10 @@
 
 [![License](https://img.shields.io/github/license/nickgerace/kimager?style=flat-square)](./LICENSE)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/nickgerace/kimager/unstable?style=flat-square)](https://hub.docker.com/r/nickgerace/kimager/tags)
-
-<!--
 [![Latest SemVer GitHub Tag](https://img.shields.io/github/v/tag/nickgerace/kimager?label=version&style=flat-square)](https://github.com/nickgerace/kimager/releases/latest)
 [![Crates.io](https://img.shields.io/crates/v/kimager?style=flat-square)](https://crates.io/crates/kimager)
+
+<!--
 [![Build Status](https://img.shields.io/github/workflow/status/nickgerace/kimager/merge/main?style=flat-square)](https://github.com/nickgerace/kimager/actions?query=workflow%3Amerge+branch%3Amain)
 -->
 
