@@ -1,10 +1,10 @@
-FROM ekidd/rust-musl-builder:stable AS build
+FROM clux/muslrust:stable AS build
 WORKDIR /build/
 COPY Cargo.toml Cargo.lock .
 COPY src/ src/
-RUN cargo build --release
+RUN cargo build --release && strip /build/target/x86_64-unknown-linux-musl/release/kimager
 
 FROM scratch
 WORKDIR /bin/
-COPY --from=build /build/target/x86_64-unknown-linux-musl/release/cluster-image-logger .
-ENTRYPOINT ["/bin/cluster-image-logger"]
+COPY --from=build /build/target/x86_64-unknown-linux-musl/release/kimager .
+ENTRYPOINT ["/bin/kimager"]
