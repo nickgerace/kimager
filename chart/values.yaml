@@ -1,7 +1,7 @@
 image:
   repository: nickgerace/kimager
   pullPolicy: Always
-  tag: unstable
+  tag: latest
 
 logLevel: ""
 

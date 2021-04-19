@@ -4,8 +4,8 @@ This document contains all information related to release.
 
 ## Preparation
 
-- Change the version in `Cargo.toml` to the new `$TAG`
-- Update `image.tag` in `values.yaml` to the new `$TAG`
+- Change the version in `Cargo.toml` to the new tag
+- Update `version` and `appVersion` in `Chart.yaml` to the new tag
 - Run the commands and verify that everything looks/works as expected:
 
 ```sh
