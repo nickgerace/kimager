@@ -37,6 +37,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Removed
 
 - `watcher.rs` in favor of using `lib.rs` for the watcher loop
-- Execution example from README with STDOUT
 - File header comments
 - Module path from `env_logger` output

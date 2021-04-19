@@ -13,6 +13,30 @@
 Container image "existence" is determined by pod creation and deletion events.
 Container image "loggging" involves using the [log crate](https://crates.io/crates/log) to record the timestamp, log level, and a message indicating what image is new to the cluster, or is no longer being used by any pods in the cluster.
 
+```bash
+[user at host in ~]
+% kubectl get pods -A
+NAMESPACE        NAME                                      READY   STATUS      RESTARTS   AGE
+kube-system      metrics-server-86cbb8457f-pqgj6           1/1     Running     0          6m3s
+kube-system      local-path-provisioner-5ff76fc89d-s2tj2   1/1     Running     0          6m3s
+kube-system      coredns-854c77959c-fmf47                  1/1     Running     0          6m3s
+kube-system      helm-install-traefik-jpzgk                0/1     Completed   0          6m4s
+kube-system      svclb-traefik-cxr7s                       2/2     Running     0          5m50s
+kube-system      traefik-6f9cbd9bd4-jqg4t                  1/1     Running     0          5m50s
+kimager-system   kimager-7d67dc9ff9-mfll9                  1/1     Running     0          12s
+
+[user at host in ~]
+% kubectl logs -n kimager-system $(kubectl get pods -n kimager-system --no-headers -o custom-columns=":metadata.name") --follow
+[2021-04-19T04:54:28Z INFO ] [+|image]  nickgerace/kimager:unstable  [kimager-system|kimager-7d67dc9ff9-mfll9]
+[2021-04-19T04:54:28Z INFO ] [+|image]  rancher/klipper-helm:v0.4.3  [kube-system|helm-install-traefik-jpzgk]
+[2021-04-19T04:54:28Z INFO ] [+|image]  rancher/metrics-server:v0.3.6  [kube-system|metrics-server-86cbb8457f-pqgj6]
+[2021-04-19T04:54:28Z INFO ] [+|image]  rancher/local-path-provisioner:v0.0.19  [kube-system|local-path-provisioner-5ff76fc89d-s2tj2]
+[2021-04-19T04:54:28Z INFO ] [+|image]  rancher/coredns-coredns:1.8.0  [kube-system|coredns-854c77959c-fmf47]
+[2021-04-19T04:54:28Z INFO ] [+|image]  rancher/library-traefik:1.7.19  [kube-system|traefik-6f9cbd9bd4-jqg4t]
+[2021-04-19T04:54:28Z INFO ] [+|image]  rancher/klipper-lb:v0.1.2  [kube-system|svclb-traefik-cxr7s]
+[2021-04-19T04:54:28Z INFO ] [+|image]  rancher/klipper-lb:v0.1.2  [kube-system|svclb-traefik-cxr7s]
+```
+
 ## Installation
 
 Clone the repository, and `cd` into it.

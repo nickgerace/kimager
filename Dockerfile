@@ -1,6 +1,7 @@
 FROM clux/muslrust:stable AS build
 WORKDIR /build/
-COPY Cargo.toml Cargo.lock .
+COPY Cargo.toml Cargo.toml
+COPY Cargo.lock Cargo.lock
 COPY src/ src/
 RUN cargo build --release && strip /build/target/x86_64-unknown-linux-musl/release/kimager
 
