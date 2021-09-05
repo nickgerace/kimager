@@ -1,3 +1,10 @@
+# NOTICE
+
+This repository has been archived.
+Please use `kubectl` commands and existing monitoring services in its place.
+The Rust crate and DockerHub image may not exist moving forward.
+Thank you for trying out `kimager`!
+
 # kimager
 
 [![License](https://img.shields.io/github/license/nickgerace/kimager?style=flat-square)](./LICENSE)
